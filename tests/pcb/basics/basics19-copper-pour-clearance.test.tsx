@@ -23,7 +23,7 @@ test("pcb basics19 preserves copper pour clearance and legacy defaults", async (
   for (const clearance of [0.3, 0, undefined]) {
     const input = circuitJson.map((element) => {
       if (element.type !== "pcb_copper_pour") return element
-      const pour = { ...element }
+      const pour: typeof element & { clearance?: number } = { ...element }
       if (clearance === undefined) {
         delete pour.clearance
       } else {
